@@ -7,7 +7,6 @@ from sqlalchemy import create_engine
 from eralchemy2 import render_er
 
 Base = declarative_base()
-
 # 
 # class Person(Base):
 #     __tablename__ = 'person'
