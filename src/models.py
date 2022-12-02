@@ -1,6 +1,6 @@
 import os
 import sys
-from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy import Column, ForeignKey, Integer, String, Enum
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
@@ -28,8 +28,11 @@ class Character(Base):
 class Favorit(Base):
     __tablename__ = 'favorits'
     id = Column(Integer, primary_key=True)
+    id_user = Column(Integer, ForeignKey('users.id'), nullable=False)
+    tipo = Column(Enum, nullable=False)
     id_character = Column(Integer, ForeignKey('characters.id'), nullable=True)
     id_planet = Column(Integer, ForeignKey('planets.id'), nullable=True)
+    user = relationship(User)
     character = relationship(Character)
     planet = relationship(Planet)
 
