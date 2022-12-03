@@ -25,15 +25,21 @@ class Character(Base):
     id = Column(Integer, primary_key=True)
     nombre = Column(String(100), nullable=False)
 
-class Favorit(Base):
-    __tablename__ = 'favorits'
+class FavoritChar(Base):
+    __tablename__ = 'favorits_characters'
     id = Column(Integer, primary_key=True)
     id_user = Column(Integer, ForeignKey('users.id'), nullable=False)
-    tipo = Column(Enum, nullable=False)
     id_character = Column(Integer, ForeignKey('characters.id'), nullable=True)
-    id_planet = Column(Integer, ForeignKey('planets.id'), nullable=True)
     user = relationship(User)
     character = relationship(Character)
+
+
+class FavoritPla(Base):
+    __tablename__ = 'favorits_planets'
+    id = Column(Integer, primary_key=True)
+    id_user = Column(Integer, ForeignKey('users.id'), nullable=False)
+    id_planet = Column(Integer, ForeignKey('planets.id'), nullable=True)
+    user = relationship(User)
     planet = relationship(Planet)
 
 
