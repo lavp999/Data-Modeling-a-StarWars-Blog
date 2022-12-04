@@ -11,8 +11,8 @@ class User(Base):
     __tablename__ = 'users'
     id = Column(Integer, primary_key=True)
     first_name = Column(String(45), nullable=False)
-    last_name = Column(String(45), nullable=False)
-    email = Column(String(120), nullable=False)
+    last_name = Column(String(45))
+    email = Column(String(120), unique=True, nullable=False)
     password = Column(String(45), nullable=False)
 
 class Planet(Base):
@@ -29,7 +29,7 @@ class FavoritChar(Base):
     __tablename__ = 'favorits_characters'
     id = Column(Integer, primary_key=True)
     id_user = Column(Integer, ForeignKey('users.id'), nullable=False)
-    id_character = Column(Integer, ForeignKey('characters.id'), nullable=True)
+    id_character = Column(Integer, ForeignKey('characters.id'), nullable=False)
     user = relationship(User)
     character = relationship(Character)
 
@@ -38,7 +38,7 @@ class FavoritPla(Base):
     __tablename__ = 'favorits_planets'
     id = Column(Integer, primary_key=True)
     id_user = Column(Integer, ForeignKey('users.id'), nullable=False)
-    id_planet = Column(Integer, ForeignKey('planets.id'), nullable=True)
+    id_planet = Column(Integer, ForeignKey('planets.id'), nullable=False)
     user = relationship(User)
     planet = relationship(Planet)
 
